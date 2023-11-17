@@ -18,22 +18,28 @@ TiendaNube.post('/', async (req, res) => {
 
   try {
     console.log(`id: ${id}, event: ${event}`)
-    await appendData('Ventas!M2', [[id, event]])
 
     if (event === 'order/created') {
       const order = await createOrder(id)
+
+      return res.status(200).json({
+        message: 'Notification received',
+        orderStatus: order.status,
+      })
     }
     if (event === 'order/paid') {
+      const order = await createOrder(id)
+
+      return res.status(200).json({
+        message: 'Notification received',
+        orderStatus: order.status,
+      })
     }
     if (event === 'order/cancelled') {
     }
 
     if (event === 'order/fulfilled' || event === 'order/packed') {
     }
-
-    res.status(200).json({
-      message: 'Notification received',
-    })
   } catch (error) {
     console.log(error)
 
