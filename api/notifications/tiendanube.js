@@ -1,5 +1,5 @@
 import express from 'express'
-import { appendData } from '../../src/connections/google'
+import { appendData } from '../../src/connections/google.js'
 
 const TiendaNube = express.Router()
 
