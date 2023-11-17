@@ -1,4 +1,5 @@
-import TiendaNube from './notifications/tiendanube'
+import express from 'express'
+import TiendaNube from './notifications/tiendanube.js'
 
 const apiRoutes = express.Router()
 
