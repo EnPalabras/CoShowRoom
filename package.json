@@ -7,7 +7,7 @@
   "scripts": {
     "build": "webpack",
     "start": "node index.js",
-    "dev": "node index.js"
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
@@ -20,5 +20,8 @@
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4",
     "webpack-node-externals": "^3.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }

@@ -1,5 +1,6 @@
 import express from 'express'
 import { appendData } from '../../src/connections/google.js'
+import { createOrder } from '../../src/tiendanube/index.js'
 
 const TiendaNube = express.Router()
 
@@ -17,14 +18,14 @@ TiendaNube.post('/', async (req, res) => {
 
   try {
     console.log(`id: ${id}, event: ${event}`)
-    await appendData('Ventas!M2', [[id], [event]])
-    if (event === 'order/cancelled') {
-    }
+    await appendData('Ventas!M2', [[id, event]])
 
     if (event === 'order/created') {
+      const order = await createOrder(id)
     }
-
     if (event === 'order/paid') {
+    }
+    if (event === 'order/cancelled') {
     }
 
     if (event === 'order/fulfilled' || event === 'order/packed') {
