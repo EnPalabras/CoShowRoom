@@ -6,7 +6,7 @@ dotenv.config()
 const { AUTH_TIENDANUBE } = process.env
 
 const checkIds = async () => {
-  const checkData = await getRows('Ventas!AJ2:AJ')
+  const checkData = await getRows('Ventas!AK2:AK')
 
   const orders = checkData.data.values
 
@@ -16,6 +16,21 @@ const checkIds = async () => {
 
   const ordersIds = orders.map((order) => order[0])
   return ordersIds
+}
+
+const PAYMENT_STATUS = {
+  paid: 'Pagado',
+  pending: 'Pendiente',
+  refunded: 'Reembolsado',
+  voided: 'Anulado',
+  authorized: 'Autorizado',
+  abandoned: 'Abandonado',
+}
+
+const ORDER_STATUS = {
+  open: 'Abierta',
+  closed: 'Cerrada',
+  cancelled: 'Cancelada',
 }
 
 export const createOrder = async (id) => {
@@ -96,8 +111,8 @@ export const createOrder = async (id) => {
       [
         number,
         new Date(created_at).toLocaleString('es-AR'),
-        status,
-        payment_status,
+        ORDER_STATUS[status],
+        PAYMENT_STATUS[payment_status],
         new Date(paid_at).toLocaleString('es-AR'),
         contact_name,
         contact_email,
@@ -120,7 +135,7 @@ export const createOrder = async (id) => {
     csvLines.push(...valuesToInclude)
   })
 
-  await appendData('Ventas!Q2', csvLines)
+  await appendData('Ventas!R2', csvLines)
 
   return {
     status: 'OK',
