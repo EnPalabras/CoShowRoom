@@ -6,7 +6,7 @@ dotenv.config()
 const { AUTH_TIENDANUBE } = process.env
 
 const checkIds = async () => {
-  const checkData = await getRows('Ventas!AE2:AE')
+  const checkData = await getRows('Ventas!AJ2:AJ')
 
   const orders = checkData.data.values
 
@@ -102,7 +102,6 @@ export const createOrder = async (id) => {
         contact_name,
         contact_email,
         contact_identification,
-
         contact_phone,
         shipping_status,
         new Date(shipped_at).toLocaleString('es-AR'),
@@ -121,7 +120,7 @@ export const createOrder = async (id) => {
     csvLines.push(...valuesToInclude)
   })
 
-  await appendData('Ventas!M2', csvLines)
+  await appendData('Ventas!Q2', csvLines)
 
   return {
     status: 'OK',
