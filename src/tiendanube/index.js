@@ -60,7 +60,12 @@ export const createOrder = async (id, event) => {
 
   const { shipping_option_code, gateway_name, payment_status, gateway } = data
 
-  if (shipping_option_code !== 'table_6629488') {
+  if (
+    shipping_option_code !== 'branch_374917' &&
+    shipping_option_code !== 'branch_374918' &&
+    shipping_option_code !== 'branch_374916' &&
+    shipping_option_code !== 'branch_374913'
+  ) {
     return {
       status: 'NOT_VALID_SHIPPING_OPTION',
       message: 'No es una venta con retiro por local',
