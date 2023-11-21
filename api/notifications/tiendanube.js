@@ -1,6 +1,5 @@
 import express from 'express'
-import { appendData } from '../../src/connections/google.js'
-import { createOrder, createPaidOrder } from '../../src/tiendanube/index.js'
+import { createOrder } from '../../src/tiendanube/index.js'
 
 const TiendaNube = express.Router()
 
@@ -20,7 +19,7 @@ TiendaNube.post('/', async (req, res) => {
     console.log(`id: ${id}, event: ${event}`)
 
     if (event === 'order/created') {
-      const order = await createOrder(id)
+      const order = await createOrder(id, event)
 
       return res.status(200).json({
         message: 'Notification received',
@@ -28,7 +27,7 @@ TiendaNube.post('/', async (req, res) => {
       })
     }
     if (event === 'order/paid') {
-      const order = await createPaidOrder(id)
+      const order = await createOrder(id, event)
 
       return res.status(200).json({
         message: 'Notification received',
